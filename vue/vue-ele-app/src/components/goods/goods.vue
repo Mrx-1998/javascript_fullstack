@@ -3,7 +3,7 @@
     <div class="goods">
       <div class="menu-wrapper" ref="menuWrapper">
         <ul>
-          <li v-for="(item,index) in goods" :key="index" class="menu-item">
+          <li v-for="(item,index) in goods" :key="index" class="menu-item" @click="selectMenu(index)" :class="{'current' : currentIndex == index}">
             <span class="text border-1px">
               <span v-if="item.type > 0" class="icon" :class="classMap[item.type]"></span>
               {{item.name}}
@@ -24,7 +24,8 @@ export default {
   data () {
     return {
       goods: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-      classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee']
+      classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee'],
+      currentIndex: [0]
     }
   },
   created () {
@@ -44,6 +45,10 @@ export default {
       this.menuScroll = new BScroll(this.$refs.menuWrapper, {
         click: true
       })
+    },
+    selectMenu (idx) {
+      console.log(idx)
+      this.currentIndex = idx
     }
   }
 }
@@ -58,6 +63,7 @@ export default {
   bottom 46px
   width 100%
   overflow hidden
+  z-index 8
   .menu-wrapper
     flex 0 0 80px
     width 80px
