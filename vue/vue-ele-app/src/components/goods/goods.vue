@@ -31,6 +31,11 @@
                     <span class="now">¥{{food.price}}</span>
                     <span class="old" v-if="food.oldPrice">¥{{food.oldPrice}}</span>
                   </div>
+                  <div class="cartcontrol-wrapper">
+                    <!-- + -->
+                  <cartcontrol :food="food" @add = "addFood">
+                  </cartcontrol>
+                  </div>
                 </div>
               </li>
             </ul>
@@ -38,11 +43,16 @@
         </ul>
       </div>
     </div>
+    <!-- 购物车 -->
+    <shopcart :selectFoods = 'selectFoods'>
+    </shopcart>
   </div>
 </template>
 
 <script>
+import shopcart from '@/components/shopcart/shopcart'
 import BScroll from 'better-scroll'
+import cartcontrol from '@/components/cartcontrol/cartcontrol'
 export default {
   name: 'Goods',
   data () {
@@ -51,7 +61,8 @@ export default {
       classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee'],
       // currentIndex: 0,
       listHeight: [],
-      scrollY: 0
+      scrollY: 0,
+      selectFoods: []
     }
   },
   created () {
@@ -67,6 +78,10 @@ export default {
         }
       })
   },
+  components: {
+    shopcart,
+    cartcontrol
+  },
   computed: {
     currentIndex () {
       for (let i = 0; i < this.listHeight.length; i++) {
@@ -77,6 +92,17 @@ export default {
         }
       }
       return 0
+    },
+    selectFoods () {
+      let foods = []
+      this.goods = forEach(good => {
+        good.foods.forEach(food => {
+          if (food.count) {
+            foods.push(food)
+          }
+        })
+      })
+      return foods
     }
   },
   methods: {
@@ -110,6 +136,9 @@ export default {
         this.listHeight.push(height)
       }
       console.log(this.listHeight)
+    },
+    addFood () {
+
     }
   }
 }
