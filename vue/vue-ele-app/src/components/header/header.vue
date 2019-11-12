@@ -15,8 +15,8 @@
           <span class="text">{{seller.supports[0].description}}</span>
         </div>
       </div>
-      <div class="support-count" @click="detailShow">
-        <span class="count" v-if="seller.supports">{{seller.supports.length}}个</span>
+      <div class="support-count" @click="detailShow" v-if="seller.supports">
+        <span class="count">{{seller.supports.length}}个</span>
         <i class="icon-keyboard_arrow_right"></i>
       </div>
     </div>
@@ -44,7 +44,7 @@
             <ul class="supports">
               <li class="support-item" v-for="(item, index) in seller.supports" :key="index">
                 <span class="icon" :class="classMap[item.type]"></span>
-                <span class="text">{{item.description}}</span>
+                <span class="text">{{ item.description }}</span>
               </li>
             </ul>
             <div class="title">
@@ -53,12 +53,12 @@
               <div class="line"></div>
             </div>
             <div class="bulletin">
-              <p class="content">{{seller.bulletin}}</p>
+              <div class="content">{{seller.bulletin}}</div>
             </div>
           </div>
         </div>
         <div class="detail-close" @click="hideDetail">
-          <i class="icon-close"></i>
+          <div class="icon-close"></div>
         </div>
       </div>
     </transition>
@@ -142,14 +142,19 @@ export default {
           margin-right 4px
           background-size 12px 12px
           background-repeat no-repeat
+
           &.decrease
             bg-image('decrease_1')
+
           &.discount
             bg-image('discount_1')
+
           &.guarantee
             bg-image('guarantee_1')
+
           &.invoice
             bg-image('invoice_1')
+
           &.special
             bg-image('special_1')
         .text
@@ -168,9 +173,9 @@ export default {
       text-align center
       .count
         vertical-align top
-      .icon-keyboard_arrow_right
-        margin-left 2px
-        line-height 24px
+        .icon-keyboard_arrow_right
+          margin-left 2px
+          line-height 24px
   .background
     position absolute
     top 0
@@ -207,48 +212,48 @@ export default {
       top 8px
       font-size 10px
   .detail
+    z-index 999
     position fixed
     top 0
     left 0
     right 0
     bottom 0
     overflow auto
-    background rgba(7, 17, 27, 0.8)
+    background rgba(7, 17, 27, .8)
     backdrop-filter blur(10px)
-    z-index 10
     &.fade-enter,
     &.fade-leave-to
       opacity 0
       background rgba(7, 17, 27, 0)
     &.fade-enter-active,
     &.fade-leave-active
-      transition all 0.5s
+      transition all .5s
     &-wrapper
       width 100%
       min-height 100%
       overflow hidden
       .detail-main
-        margin-top 64px
-        padding-bottom 64px
-        .name
-          line-height 16px
-          font-size 16px
-          text-align center
-          font-weight 700
-        .title
-          display flex
-          width 80%
-          margin 28px auto 24px auto
-        .line
-          border-bottom 1px solid rgba(255, 255, 255, 0.2)
-          flex 1
-          position relative
-          top -6px
-        .text
-          font-size 14px
-          font-weight 700
-          padding 0 12px
-        .supports
+         margin-top 64px
+         padding-bottom 64px
+      .name
+        line-height 16px
+        font-size 16px
+        text-align center
+        font-weight 700
+      .title
+        display flex
+        width 80%
+        margin 28px auto 24px auto
+      .line
+        border-bottom 1px solid rgba(255, 255, 255, 0.2)
+        flex 1
+        position relative
+        top -6px
+      .text
+        font-size 14px
+        font-weight 700
+        padding 0 12px
+      .supports
           width 80%
           margin 0 auto
           .support-item
@@ -278,15 +283,14 @@ export default {
             .text
               line-height 16px
               font-size 12px
-        .bulletin
-          width 80%
-          margin 0 auto
-          .content
-            padding 0 12px
-            line-height 24px
-            font-size 12px
+      .bulletin
+        width 80%
+        margin 0 auto
+        .content
+          padding 0 12px
+          line-height 24px
+          font-size 12px
     .detail-close
-      position relative
       width 32px
       height 32px
       margin -64px auto 0 auto
