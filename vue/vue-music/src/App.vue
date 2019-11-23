@@ -10,7 +10,7 @@
     </v-header>
     <!-- tab -->
     <v-tab></v-tab>
-    <!-- <router-view/> -->
+    <router-view/>
     <v-sidebar></v-sidebar>
   </div>
 </template>
